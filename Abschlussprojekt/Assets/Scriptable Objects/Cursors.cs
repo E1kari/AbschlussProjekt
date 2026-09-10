@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Cursors", menuName = "Scriptable Objects/Cursors")]
@@ -15,7 +14,7 @@ public class Cursors : ScriptableObject
 
     }
 
-    [System.Serializable]
+    [Serializable]
     public struct CursorStruct
     {
         public CursorType type;
