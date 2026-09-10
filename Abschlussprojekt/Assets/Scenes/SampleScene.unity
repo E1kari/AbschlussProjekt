@@ -1845,8 +1845,28 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 123111708365165181, guid: ed4f61b7144f94a4cade07c7a05c2955, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7030811065756829263}
   m_SourcePrefab: {fileID: 100100000, guid: ed4f61b7144f94a4cade07c7a05c2955, type: 3}
+--- !u!1 &7030811065756829262 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 123111708365165181, guid: ed4f61b7144f94a4cade07c7a05c2955, type: 3}
+  m_PrefabInstance: {fileID: 7030811065756829261}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7030811065756829263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7030811065756829262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 837c92ddf7ea4134f865150348d0e3ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CursorManager
 --- !u!1001 &8300782376892165261
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1855,13 +1875,65 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 206416032176026157, guid: 2243aff1a5976db4bbe5bdd51b018ec5, type: 3}
+      propertyPath: m_Type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 206416032176026157, guid: 2243aff1a5976db4bbe5bdd51b018ec5, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 110988043, guid: 693869be9c7eeda4491285292f3305d2, type: 3}
+    - target: {fileID: 1839967647027273449, guid: 2243aff1a5976db4bbe5bdd51b018ec5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 215
+      objectReference: {fileID: 0}
+    - target: {fileID: 2574127996000755888, guid: 2243aff1a5976db4bbe5bdd51b018ec5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -356
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205275765726682764, guid: 2243aff1a5976db4bbe5bdd51b018ec5, type: 3}
+      propertyPath: m_Type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205275765726682764, guid: 2243aff1a5976db4bbe5bdd51b018ec5, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 110988043, guid: 693869be9c7eeda4491285292f3305d2, type: 3}
+    - target: {fileID: 3573684025220796614, guid: 2243aff1a5976db4bbe5bdd51b018ec5, type: 3}
+      propertyPath: m_Type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3573684025220796614, guid: 2243aff1a5976db4bbe5bdd51b018ec5, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 110988043, guid: 693869be9c7eeda4491285292f3305d2, type: 3}
     - target: {fileID: 3659989391026235649, guid: 2243aff1a5976db4bbe5bdd51b018ec5, type: 3}
       propertyPath: m_Name
       value: PauseMenu
       objectReference: {fileID: 0}
     - target: {fileID: 3659989391026235649, guid: 2243aff1a5976db4bbe5bdd51b018ec5, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4002482085715032379, guid: 2243aff1a5976db4bbe5bdd51b018ec5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -37
+      objectReference: {fileID: 0}
+    - target: {fileID: 5070509153585743055, guid: 2243aff1a5976db4bbe5bdd51b018ec5, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5070509153585743055, guid: 2243aff1a5976db4bbe5bdd51b018ec5, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5070509153585743055, guid: 2243aff1a5976db4bbe5bdd51b018ec5, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 2560
+      objectReference: {fileID: 0}
+    - target: {fileID: 5070509153585743055, guid: 2243aff1a5976db4bbe5bdd51b018ec5, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1440
       objectReference: {fileID: 0}
     - target: {fileID: 5543535152816395341, guid: 2243aff1a5976db4bbe5bdd51b018ec5, type: 3}
       propertyPath: m_Pivot.x

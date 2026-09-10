@@ -14,10 +14,11 @@ public class PauseManager : MonoBehaviour
     private bool isPaused = false;
     GameObject player;
 
-    InputAction pauseAction = InputSystem.actions.FindAction("Pause");
+    InputAction pauseAction;
 
     public void Start()
     {
+        pauseAction = InputSystem.actions.FindAction("Pause");
         StartCoroutine(OnSceneLoaded());
     }
 
