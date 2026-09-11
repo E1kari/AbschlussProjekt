@@ -22,23 +22,11 @@ public class S_AudioData : ScriptableObject
 
     public enum AudioIndex
     {
-        Player_Jump,
-        Player_WallJump,
-        Player_Dash,
-        Player_Death,
-        Enemy_Attack,
-        Enemy_Death,
-        Player_GrapplingHook,
-        Environment_GrappleSpeedBoost,
-        Environment_FallingBlock,
-        Environment_BreakableBlock,
-        Environment_LevelStart,
-        Environment_LevelEnd,
-        Music_Level1,
-        Music_Level2,
-        Music_Level3,
         UI_buttonClick,
         UI_sliderGrab,
+        MINIGAME_perfect,
+        MINIGAME_success,
+        MINIGAME_fail,
     }
 
 

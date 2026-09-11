@@ -6,7 +6,7 @@ using static S_AudioData;
 
 public class AudioManager : MonoBehaviour
 {
-    private S_AudioData audioData;
+    [SerializeField] private S_AudioData audioData;
     private AudioSource musicSource;
     private AudioSource effectSource;
 
@@ -20,18 +20,18 @@ public class AudioManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
-        audioData = Resources.Load<S_AudioData>("Scriptable Objects/AudioData");
+        //audioData = Resources.Load<S_AudioData>("Scriptable Objects/AudioData");
 
         musicSource = gameObject.AddComponent<AudioSource>();
         musicSource.loop = true;
 
         effectSource = gameObject.AddComponent<AudioSource>();
-
-        UpdateVolumes();
     }
 
     public void UpdateVolumes()
     {
+        if (musicSource == null || effectSource == null) return;
+
         musicSource.volume = audioData.masterVolume * audioData.musicVolume;
         effectSource.volume = audioData.masterVolume * audioData.effectVolume;
     }
@@ -58,6 +58,8 @@ public class AudioManager : MonoBehaviour
         {
             TriggerMusic();
         }
+
+        UpdateVolumes();
     }
 
     public void TriggerMusic()
@@ -67,7 +69,7 @@ public class AudioManager : MonoBehaviour
 
         if (sceneSaver.GetPreviousLevelSceneName() != scene.name)
         {
-            string levelNameNumber = scene.name.Substring(scene.name.Length - 1, 1);
+            string levelNameNumber = scene.name.Substring(scene.name.Length - 1, 1); //ToDo ACH DU SCHEIßE, PAST ME WAS IST DAS
             int levelNum = int.Parse(levelNameNumber);
 
             PlayMusic(levelNum);
