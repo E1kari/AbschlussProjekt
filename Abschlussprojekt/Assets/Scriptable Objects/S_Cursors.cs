@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Cursors", menuName = "Scriptable Objects/Cursors")]
-public class Cursors : ScriptableObject
+public class S_Cursors : ScriptableObject
 {
     public enum CursorType
     {
@@ -19,6 +19,7 @@ public class Cursors : ScriptableObject
     {
         public CursorType type;
         public Texture2D texture;
+        public Texture2D clickedTexture;
         public Vector2 hotspot;
     }
 
