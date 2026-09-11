@@ -1,10 +1,10 @@
 using UnityEngine;
 using static Minigame;
-using static Minigames;
+using static S_Minigames;
 
 public class MinigameManager : MonoBehaviour
 {
-    [SerializeField] Minigames minigames;
+    [SerializeField] S_Minigames minigames;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,8 +21,9 @@ public class MinigameManager : MonoBehaviour
     public void startMinigame(MinigameNames minigameName, DifficultyName difficultyName)
     {
         MinigameStruct minigame = minigames.GetMinigame(minigameName);
-        Minigame instance = Instantiate(minigame.minigamePrefab);
+        GameObject instance = Instantiate(minigame.minigamePrefab);
 
-        instance.SetupGame(difficultyName);
+        if (instance.TryGetComponent(out Minigame game))
+            game.SetupGame(difficultyName);
     }
 }

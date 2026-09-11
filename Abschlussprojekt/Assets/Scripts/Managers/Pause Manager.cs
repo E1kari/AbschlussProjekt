@@ -1,7 +1,7 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
@@ -12,7 +12,7 @@ public class PauseManager : MonoBehaviour
 
     private GameObject pauseMenu_;
     private bool isPaused = false;
-    GameObject player;
+    Minigame[] pausedMinigames_;
 
     InputAction pauseAction;
 
@@ -30,7 +30,7 @@ public class PauseManager : MonoBehaviour
 
     public void Update()
     {
-        if (pauseAction.IsPressed())
+        if (pauseAction.WasPressedThisFrame())
         {
             TogglePause(true);
         }
@@ -48,34 +48,41 @@ public class PauseManager : MonoBehaviour
         }
     }
 
-    private void PauseGame(bool loadPauseMenu)
+    private void PauseGame(bool loadPauseMenu = true)
     {
         Time.timeScale = 0f; // Freeze time
-        player = GameObject.FindWithTag("Player");
-        player?.SetActive(false);
+        isPaused = true;
+
+        pausedMinigames_ = FindObjectsByType<Minigame>();
+        foreach (Minigame minigame in pausedMinigames_)
+        {
+            Debug.LogWarning(minigame.name + " is paused");
+            minigame.GameObject().SetActive(false);
+        }
+
         if (loadPauseMenu)
         {
             if (pauseMenu_ == null)
             {
                 pauseMenu_ = Instantiate(pauseMenu_Prefab);
             }
-            pauseMenu_.SetActive(true);
-
-            //SceneManager.LoadScene("menu_pause", LoadSceneMode.Additive); // Load menu without unloading game
         }
-        isPaused = true;
     }
 
     private void ResumeGame()
     {
-        // if (SceneManager.GetSceneByName("menu_pause").isLoaded)
-        // {
-        //     SceneManager.UnloadSceneAsync("menu_pause"); // Unload menu
-        // }
-        isPaused = false;
-        player.SetActive(true);
+        Debug.Log("Resuming game");
         Time.timeScale = 1f; // Resume time
+        isPaused = false;
 
-        pauseMenu_.SetActive(false);
+        foreach (Minigame minigame in pausedMinigames_)
+        {
+            Debug.LogWarning(minigame.name + " is resumed");
+            minigame.GameObject().SetActive(true);
+        }
+
+        pausedMinigames_ = null;
+
+        GameObject.Destroy(pauseMenu_);
     }
 }

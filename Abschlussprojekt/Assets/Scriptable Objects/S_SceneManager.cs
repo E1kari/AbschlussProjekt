@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-[CreateAssetMenu(fileName = "S_SceneSaver", menuName = "Scriptable Objects/S_SceneSaver")]
+[CreateAssetMenu(fileName = "S_SceneManager", menuName = "Scriptable Objects/S_SceneManager")]
 
 
 public class S_SceneManager : ScriptableObject
@@ -21,9 +21,6 @@ public class S_SceneManager : ScriptableObject
     private static void Initialize()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-#if !UNITY_EDITOR
-        Logger.Instance.Log("SceneSaver initialized", "SceneSaver", LogType.Log);
-#endif
     }
 
     private static void OnSceneLoaded(Scene scene, LoadSceneMode mode)

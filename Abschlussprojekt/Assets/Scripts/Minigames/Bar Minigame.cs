@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static Minigame;
+using static S_AudioData;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
@@ -56,8 +57,6 @@ public class BarMinigame : Minigame
     {
         currentDifficulty = difficultyName;
         BarDifficultyParams diffParams = GetDifficultyParams(difficultyName);
-
-        GetComponentInChildren<PointerController>().moveSpeed = diffParams.cursorMoveSpeed;
 
 
         //-----------------safe zone-----------------\\
@@ -118,17 +117,23 @@ public class BarMinigame : Minigame
 
     void CheckSuccess()
     {
+        AudioManager audioManager = FindAnyObjectByType<AudioManager>();
+
+
         // Check if the pointer is within the safe zone
         if (RectTransformUtility.RectangleContainsScreenPoint(perfectZone, cursor.position, null))
         {
+            audioManager.PlayAudio(AudioIndex.MINIGAME_perfect);
             Debug.Log("Perfect!");
         }
         else if (RectTransformUtility.RectangleContainsScreenPoint(safeZone, cursor.position, null))
         {
+            audioManager.PlayAudio(AudioIndex.MINIGAME_success);
             Debug.Log("Success!");
         }
         else
         {
+            audioManager.PlayAudio(AudioIndex.MINIGAME_fail);
             Debug.Log("Fail!");
         }
 

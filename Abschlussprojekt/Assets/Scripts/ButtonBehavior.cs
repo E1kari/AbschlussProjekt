@@ -11,24 +11,12 @@ using UnityEditor;
 public class ButtonBehavior : MonoBehaviour
 {
 
-    private GameObject[] panels_;
-    private S_SceneManager sceneManager_;
-
     public void Start()
     {
-        sceneManager_ = Resources.Load<S_SceneManager>("Scriptable Objects/S_SceneManager");
 
-        //panels_ = GameObject.FindGameObjectsWithTag("Panel");
-        //foreach (GameObject panel in panels_)
-        //{
-        //    if (panel.name != "Sound Panel")
-        //    {
-        //        panel.SetActive(false);
-        //    }
-        //}
     }
 
-    public void LoadSceneByName(string sceneNameToLoad)
+    private void LoadSceneByName(string sceneNameToLoad)
     {
         if (string.IsNullOrEmpty(sceneNameToLoad))
         {
@@ -36,33 +24,20 @@ public class ButtonBehavior : MonoBehaviour
             return;
         }
 
-        if (sceneNameToLoad.ToLower().Contains("menu") && !sceneNameToLoad.ToLower().Contains("main"))
-        {
-            SceneManager.LoadScene(sceneNameToLoad, LoadSceneMode.Additive);
-        }
-        else if (sceneNameToLoad.ToLower().Contains("level") || sceneNameToLoad.ToLower().Contains("room") || sceneNameToLoad.ToLower().Contains("main"))
-        {
-            SceneManager.LoadScene(sceneNameToLoad, LoadSceneMode.Single);
-        }
-        else
-        {
-            Debug.LogError("Invalid scene name: " + sceneNameToLoad);
-        }
-
+        SceneManager.LoadScene(sceneNameToLoad, LoadSceneMode.Single);
     }
 
 
     // Wrapper method to be called by the button in the Unity Inspector
     public void LoadSceneWrapper(SceneRef sceneRef)
     {
-        // AudioManager audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
-        // audioManager.PlayAudio(AudioIndex.UI_buttonClick);
+        playButtonClick();
 
         string sceneName = sceneRef.sceneName;
 
         if (string.IsNullOrEmpty(sceneName))
         {
-            Debug.LogError("Scene name is empty");
+            Debug.LogError("Scene ref is empty");
             return;
         }
 
@@ -71,88 +46,40 @@ public class ButtonBehavior : MonoBehaviour
 
     }
 
-    public void activatePanel(GameObject pa_panel)
+    public void resumeGame()
     {
-        AudioManager audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
-        audioManager.PlayAudio(AudioIndex.UI_buttonClick);
+        playButtonClick();
 
-        if (pa_panel == null)
-        {
-            Debug.LogError("Panel is not set");
-            return;
-        }
-
-        foreach (GameObject panel in panels_)
-        {
-            panel.SetActive(false);
-        }
-        pa_panel.gameObject.SetActive(true);
+        GameObject.FindAnyObjectByType<PauseManager>()?.TogglePause();
     }
 
-    public void startLevel()
-    {
-        AudioManager audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
-        audioManager.PlayAudio(AudioIndex.UI_buttonClick);
+    // public void back()
+    // {
+    //    playButtonClick();
 
-        //GameObject.Find("Preview Manager").GetComponent<PreviewManager>().reactivatePauseManager();
-        SceneManager.UnloadSceneAsync("menu_preview");
-        resumeLevel();
-    }
+    //     SceneManager.UnloadSceneAsync("menu_options");
 
-    public void nextLevel()
-    {
-        AudioManager audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
-        audioManager.PlayAudio(AudioIndex.UI_buttonClick);
-
-        int nextLevelIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        string levelName = System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(nextLevelIndex));
-        SceneManager.LoadScene(levelName);
-    }
-
-    public void resetLevel()
-    {
-        AudioManager audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
-        audioManager.PlayAudio(AudioIndex.UI_buttonClick);
-
-        resumeLevel();
-        SceneManager.LoadScene(sceneManager_.GetCurrentLevelSceneName());
-        //S_Timer timer = Resources.Load<S_Timer>("Scriptable Objects/Timer");
-        //timer.ResetTimer();
-
-        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
-    }
-
-    public void resumeLevel()
-    {
-        AudioManager audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
-        audioManager.PlayAudio(AudioIndex.UI_buttonClick);
-
-        GameObject.Find("Pause Manager").GetComponent<PauseManager>().TogglePause();
-    }
-
-    public void back()
-    {
-        AudioManager audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
-        audioManager.PlayAudio(AudioIndex.UI_buttonClick);
-
-        SceneManager.UnloadSceneAsync("menu_options");
-
-        if (SceneManager.GetSceneByName("menu_pause").isLoaded)
-        {
-            S_SceneManager.determineSelectedButton(SceneManager.GetSceneByName("menu_pause"));
-        }
-        else if (SceneManager.GetSceneByName("menu_main").isLoaded)
-        {
-            S_SceneManager.determineSelectedButton(SceneManager.GetSceneByName("menu_main"));
-        }
-    }
+    //     if (SceneManager.GetSceneByName("menu_pause").isLoaded)
+    //     {
+    //         S_SceneManager.determineSelectedButton(SceneManager.GetSceneByName("menu_pause"));
+    //     }
+    //     else if (SceneManager.GetSceneByName("menu_main").isLoaded)
+    //     {
+    //         S_SceneManager.determineSelectedButton(SceneManager.GetSceneByName("menu_main"));
+    //     }
+    // }
 
     public void exitGame()
     {
-        AudioManager audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
-        audioManager.PlayAudio(AudioIndex.UI_buttonClick);
+        playButtonClick();
 
         Debug.Log("closing game...");
         Application.Quit();
+    }
+
+    private void playButtonClick()
+    {
+        AudioManager audioManager = FindAnyObjectByType<AudioManager>();
+        audioManager.PlayAudio(AudioIndex.UI_buttonClick);
     }
 }

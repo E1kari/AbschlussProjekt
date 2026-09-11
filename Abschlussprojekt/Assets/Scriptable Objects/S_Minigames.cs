@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Minigames", menuName = "Scriptable Objects/Minigames")]
-public class Minigames : ScriptableObject
+public class S_Minigames : ScriptableObject
 {
     public enum MinigameNames
     {
@@ -14,7 +14,7 @@ public class Minigames : ScriptableObject
     public struct MinigameStruct
     {
         public MinigameNames minigameName;
-        public Minigame minigamePrefab;
+        public GameObject minigamePrefab;
     }
 
     public MinigameStruct[] minigames;
