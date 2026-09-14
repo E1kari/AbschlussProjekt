@@ -10,8 +10,8 @@ public abstract class Minigame : MonoBehaviour
         Hard,
     };
 
-    public InputAction interactAction;
-    public DifficultyName currentDifficulty;
+    protected InputAction interactAction;
+    protected DifficultyName currentDifficulty;
 
     protected virtual void Start()
     {
