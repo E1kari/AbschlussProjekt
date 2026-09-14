@@ -4,33 +4,39 @@ using static S_AudioData;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
-public class ChargeMinigame : BarMinigame
+public class HoldMinigame : BarMinigame
 {
     [Serializable]
-    public struct ChargeDifficultyParams
+    public struct HoldDifficultyParams
     {
         public DifficultyName difficulty;
 
         [Space(10)]
         public float safeZoneWidth_min;
         public float safeZoneWidth_max;
+        [Range(0f, 100f)] public float safeZone_percentagePerSec;
 
         [Space(10)]
         public float perfectZoneWidth_min;
         public float perfectZoneWidth_max;
+        [Range(0f, 100f)] public float perfectZone_percentagePerSec;
         [Range(0f, 1f)] public float perfectToMidRatio_max;
 
         [Space(10)]
+        [Range(0f, 100f)] public float baseZone_falloffPercentagePerSec;
+
+        [Space(10)]
         public float cursorMoveSpeed;
+        public float cursorFalloffSpeed;
     }
-    public bool reverseAtEnd = false;
+    protected float holdPercentage;
 
-    public ChargeDifficultyParams[] difficultyParams_;
+    public HoldDifficultyParams[] difficultyParams_;
 
 
-    public ChargeDifficultyParams GetDifficultyParams(DifficultyName difficultyName)
+    public HoldDifficultyParams GetDifficultyParams(DifficultyName difficultyName)
     {
-        foreach (ChargeDifficultyParams param in difficultyParams_)
+        foreach (HoldDifficultyParams param in difficultyParams_)
         {
             if (param.difficulty == difficultyName)
             {
@@ -45,7 +51,7 @@ public class ChargeMinigame : BarMinigame
     public override void SetupGame(DifficultyName difficultyName)
     {
         currentDifficulty = difficultyName;
-        ChargeDifficultyParams diffParams = GetDifficultyParams(difficultyName);
+        HoldDifficultyParams diffParams = GetDifficultyParams(difficultyName);
 
 
         //-----------------safe zone-----------------\\
@@ -76,26 +82,28 @@ public class ChargeMinigame : BarMinigame
     void CheckSuccess()
     {
         AudioManager audioManager = FindAnyObjectByType<AudioManager>();
-
+        HoldDifficultyParams diffParams = GetDifficultyParams(currentDifficulty);
 
         // Check if the pointer is within the safe zone
         if (RectTransformUtility.RectangleContainsScreenPoint(perfectZone, cursor.position, null))
         {
-            audioManager.PlayAudio(AudioIndex.MINIGAME_perfect);
-            Debug.Log("Perfect!");
+            holdPercentage += Time.deltaTime * diffParams.perfectZone_percentagePerSec;
         }
         else if (RectTransformUtility.RectangleContainsScreenPoint(safeZone, cursor.position, null))
         {
-            audioManager.PlayAudio(AudioIndex.MINIGAME_success);
-            Debug.Log("Success!");
+            holdPercentage += Time.deltaTime * diffParams.safeZone_percentagePerSec;
         }
         else
         {
-            audioManager.PlayAudio(AudioIndex.MINIGAME_fail);
-            Debug.Log("Fail!");
+            holdPercentage -= Time.deltaTime * diffParams.baseZone_falloffPercentagePerSec;
         }
 
-        endGame();
+        if (holdPercentage >= 100f)
+        {
+            audioManager.PlayAudio(AudioIndex.MINIGAME_perfect);
+            endGame();
+        }
+
     }
 
     public override void endGame()
@@ -106,37 +114,18 @@ public class ChargeMinigame : BarMinigame
 
     public override void UpdateGame()
     {
-        ChargeDifficultyParams diffParams = GetDifficultyParams(currentDifficulty);
+        HoldDifficultyParams diffParams = GetDifficultyParams(currentDifficulty);
 
-        if (interactAction.IsPressed() && reverseAtEnd)
+        if (interactAction.IsPressed())
         {
-            // Change direction if the pointer reaches one of the points
-            if (Vector3.Distance(cursor.position, startPoint.position) < 0.1f)
-            {
-                targetPosition = endPoint.position;
-            }
-            else if (Vector3.Distance(cursor.position, endPoint.position) < 0.1f)
-            {
-                targetPosition = startPoint.position;
-            }
-
-            cursor.position = Vector3.MoveTowards(cursor.position, targetPosition, diffParams.cursorMoveSpeed * Time.deltaTime);
+            cursor.position = Vector3.MoveTowards(cursor.position, endPoint.position, diffParams.cursorMoveSpeed * Time.deltaTime);
         }
         else
         {
-            if (interactAction.IsPressed() && !(Vector3.Distance(cursor.position, endPoint.position) < 0.1f))
-            {
-                // Move the pointer towards the target position
-                cursor.position = Vector3.MoveTowards(cursor.position, targetPosition, diffParams.cursorMoveSpeed * Time.deltaTime);
-            }
+            cursor.position = Vector3.MoveTowards(cursor.position, startPoint.position, diffParams.cursorFalloffSpeed * Time.deltaTime);
         }
 
 
-
-        // Check for input
-        if (interactAction.WasReleasedThisFrame())
-        {
-            CheckSuccess();
-        }
+        CheckSuccess();
     }
 }

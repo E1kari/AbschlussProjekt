@@ -9,12 +9,14 @@ public class MinigameManager : MonoBehaviour
 
     public InputAction startReactionGame;
     public InputAction startChargeGame;
+    public InputAction startHoldGame;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         startReactionGame = InputSystem.actions.FindAction("DEBUG_StartReactionGame");
         startChargeGame = InputSystem.actions.FindAction("DEBUG_StartChargeGame");
+        startHoldGame = InputSystem.actions.FindAction("DEBUG_StartHoldGame");
     }
 
     // Update is called once per frame
@@ -29,6 +31,11 @@ public class MinigameManager : MonoBehaviour
         {
             Debug.Log("Starting charge minigame");
             startMinigame(MinigameNames.Charge, DifficultyName.Easy);
+        }
+        if (startHoldGame.WasPressedThisFrame())
+        {
+            Debug.Log("Starting hold minigame");
+            startMinigame(MinigameNames.Hold, DifficultyName.Easy);
         }
     }
 

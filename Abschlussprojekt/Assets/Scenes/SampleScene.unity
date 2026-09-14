@@ -1060,6 +1060,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5928666747671709079, guid: ed4f61b7144f94a4cade07c7a05c2955, type: 3}
+      propertyPath: startHoldGame.m_Name
+      value: Start Hold Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 5928666747671709079, guid: ed4f61b7144f94a4cade07c7a05c2955, type: 3}
       propertyPath: startChargeGame.m_Name
       value: Start Charge Game
       objectReference: {fileID: 0}

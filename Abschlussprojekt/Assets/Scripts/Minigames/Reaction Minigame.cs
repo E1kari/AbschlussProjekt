@@ -12,13 +12,16 @@ public class ReactionMinigame : BarMinigame
     {
         public DifficultyName difficulty;
 
+        [Space(10)]
         public float safeZoneWidth_min;
         public float safeZoneWidth_max;
 
+        [Space(10)]
         public float perfectZoneWidth_min;
         public float perfectZoneWidth_max;
         [Range(0f, 1f)] public float perfectToMidRatio_max;
 
+        [Space(10)]
         public float cursorMoveSpeed;
     }
 
