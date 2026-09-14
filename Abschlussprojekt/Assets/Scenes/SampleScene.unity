@@ -1015,6 +1015,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Managers
       objectReference: {fileID: 0}
+    - target: {fileID: 4201098818673583452, guid: ed4f61b7144f94a4cade07c7a05c2955, type: 3}
+      propertyPath: audioData
+      value: 
+      objectReference: {fileID: 11400000, guid: d568ef1a57344da4ab1f8e7d26c882c6, type: 2}
     - target: {fileID: 4469576000076531219, guid: ed4f61b7144f94a4cade07c7a05c2955, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1192.2753
