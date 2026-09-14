@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public abstract class BarMinigame : MonoBehaviour
+public abstract class BarMinigame : Minigame
 {
 
     public RectTransform safeZone;
@@ -12,31 +11,13 @@ public abstract class BarMinigame : MonoBehaviour
     public Transform startPoint;
     public Transform endPoint;
 
-    public InputAction interactAction;
     public Vector3 targetPosition;
-    public DifficultyName currentDifficulty;
 
-    public enum DifficultyName
+    protected override void Start()
     {
-        Easy,
-        Normal,
-        Hard,
-    };
-
-    void Start()
-    {
-        interactAction = InputSystem.actions.FindAction("Interact");
+        base.Start();
 
         targetPosition = endPoint.position;
         cursor.position = startPoint.position;
     }
-
-    void Update()
-    {
-        UpdateGame();
-    }
-
-    public abstract void SetupGame(DifficultyName difficulty);
-    public abstract void UpdateGame();
-    public abstract void endGame();
 }

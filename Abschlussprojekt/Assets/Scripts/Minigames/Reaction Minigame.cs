@@ -1,7 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using static BarMinigame;
 using static S_AudioData;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
@@ -65,6 +63,9 @@ public class ReactionMinigame : BarMinigame
         float barWidth_safe = ((RectTransform)perfectZone.parent).rect.width;
         float maxOffset_perfect = barWidth_safe - perfectZone_Width;
         perfectZone.anchoredPosition = new Vector2(Random.Range(0, maxOffset_perfect), perfectZone.anchoredPosition.y);
+
+        //-----------------cursor-----------------\\
+        cursor.position = startPoint.position;
     }
 
 
@@ -95,8 +96,8 @@ public class ReactionMinigame : BarMinigame
 
     public override void endGame()
     {
-        SetupGame(currentDifficulty);
-        //Object.Destroy(this.gameObject);
+        //SetupGame(currentDifficulty);
+        Object.Destroy(this.gameObject);
     }
 
     public override void UpdateGame()

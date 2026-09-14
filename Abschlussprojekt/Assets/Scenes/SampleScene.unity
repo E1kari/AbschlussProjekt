@@ -1059,6 +1059,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5928666747671709079, guid: ed4f61b7144f94a4cade07c7a05c2955, type: 3}
+      propertyPath: startChargeGame.m_Name
+      value: Start Charge Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 5928666747671709079, guid: ed4f61b7144f94a4cade07c7a05c2955, type: 3}
+      propertyPath: startReactionGame.m_Name
+      value: Start Reaction Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 5928666747671709079, guid: ed4f61b7144f94a4cade07c7a05c2955, type: 3}
+      propertyPath: startChargeGame.m_SingletonActionBindings.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5928666747671709079, guid: ed4f61b7144f94a4cade07c7a05c2955, type: 3}
+      propertyPath: startReactionGame.m_SingletonActionBindings.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5928666747671709079, guid: ed4f61b7144f94a4cade07c7a05c2955, type: 3}
+      propertyPath: startChargeGame.m_SingletonActionBindings.Array.data[0].m_Id
+      value: 4bc4f191-3041-46c1-bad4-5d1e574e3dc3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5928666747671709079, guid: ed4f61b7144f94a4cade07c7a05c2955, type: 3}
+      propertyPath: startChargeGame.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/c
+      objectReference: {fileID: 0}
+    - target: {fileID: 5928666747671709079, guid: ed4f61b7144f94a4cade07c7a05c2955, type: 3}
+      propertyPath: startReactionGame.m_SingletonActionBindings.Array.data[0].m_Id
+      value: b5c0011d-1464-43e6-a1d0-4231f6b1d2e9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5928666747671709079, guid: ed4f61b7144f94a4cade07c7a05c2955, type: 3}
+      propertyPath: startChargeGame.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Start Charge Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 5928666747671709079, guid: ed4f61b7144f94a4cade07c7a05c2955, type: 3}
+      propertyPath: startReactionGame.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/r
+      objectReference: {fileID: 0}
+    - target: {fileID: 5928666747671709079, guid: ed4f61b7144f94a4cade07c7a05c2955, type: 3}
+      propertyPath: startReactionGame.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Start Reaction Game
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

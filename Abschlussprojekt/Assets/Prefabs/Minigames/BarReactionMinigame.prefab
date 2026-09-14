@@ -246,6 +246,17 @@ MonoBehaviour:
   cursor: {fileID: 5567435837096687593}
   startPoint: {fileID: 3141275532151675325}
   endPoint: {fileID: 5372826745812971179}
+  interactAction:
+    m_Name: Interact
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 76ba33c7-e227-4bf7-b523-63bbcd61a695
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  targetPosition: {x: 0, y: 0, z: 0}
+  currentDifficulty: 0
   difficultyParams_:
   - difficulty: 0
     safeZoneWidth_min: 650
@@ -405,7 +416,7 @@ GameObject:
   - component: {fileID: 6013861806677128583}
   - component: {fileID: 4081858312715431159}
   m_Layer: 5
-  m_Name: Bar Perfect Target Zone
+  m_Name: Bar Perfect Zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -15,3 +15,5 @@ MonoBehaviour:
   minigames:
   - minigameName: 0
     minigamePrefab: {fileID: 2631724744197914178, guid: 6ad36f3646dbc3846bcaff76ed52e05c, type: 3}
+  - minigameName: 1
+    minigamePrefab: {fileID: 2631724744197914178, guid: 0925bcebf805e3c438b11fe24f0b1df8, type: 3}
