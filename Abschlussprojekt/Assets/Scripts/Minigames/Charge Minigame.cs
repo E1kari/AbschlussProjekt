@@ -1,7 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using static BarMinigame;
 using static S_AudioData;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
@@ -9,7 +7,7 @@ using Random = UnityEngine.Random;
 public class ChargeMinigame : BarMinigame
 {
     [Serializable]
-    public struct BarDifficultyParams
+    public struct ChargeDifficultyParams
     {
         public DifficultyName difficulty;
 
@@ -23,12 +21,12 @@ public class ChargeMinigame : BarMinigame
         public float cursorMoveSpeed;
     }
 
-    public BarDifficultyParams[] difficultyParams_;
+    public ChargeDifficultyParams[] difficultyParams_;
 
 
-    public BarDifficultyParams GetDifficultyParams(DifficultyName difficultyName)
+    public ChargeDifficultyParams GetDifficultyParams(DifficultyName difficultyName)
     {
-        foreach (BarDifficultyParams param in difficultyParams_)
+        foreach (ChargeDifficultyParams param in difficultyParams_)
         {
             if (param.difficulty == difficultyName)
             {
@@ -43,7 +41,7 @@ public class ChargeMinigame : BarMinigame
     public override void SetupGame(DifficultyName difficultyName)
     {
         currentDifficulty = difficultyName;
-        BarDifficultyParams diffParams = GetDifficultyParams(difficultyName);
+        ChargeDifficultyParams diffParams = GetDifficultyParams(difficultyName);
 
 
         //-----------------safe zone-----------------\\
@@ -64,6 +62,10 @@ public class ChargeMinigame : BarMinigame
         float barWidth_safe = ((RectTransform)perfectZone.parent).rect.width;
         float maxOffset_perfect = barWidth_safe - perfectZone_Width;
         perfectZone.anchoredPosition = new Vector2(Random.Range(0, maxOffset_perfect), perfectZone.anchoredPosition.y);
+
+
+        //-----------------cursor-----------------\\
+        cursor.position = startPoint.position;
     }
 
 
@@ -94,28 +96,22 @@ public class ChargeMinigame : BarMinigame
 
     public override void endGame()
     {
-        SetupGame(currentDifficulty);
-        //Object.Destroy(this.gameObject);
+        //SetupGame(currentDifficulty);
+        Object.Destroy(this.gameObject);
     }
 
     public override void UpdateGame()
     {
-        BarDifficultyParams diffParams = GetDifficultyParams(currentDifficulty);
-        // Move the pointer towards the target position
-        cursor.position = Vector3.MoveTowards(cursor.position, targetPosition, diffParams.cursorMoveSpeed * Time.deltaTime);
+        ChargeDifficultyParams diffParams = GetDifficultyParams(currentDifficulty);
 
-        // Change direction if the pointer reaches one of the points
-        if (Vector3.Distance(cursor.position, startPoint.position) < 0.1f)
+        if (interactAction.IsPressed() && !(Vector3.Distance(cursor.position, endPoint.position) < 0.1f))
         {
-            targetPosition = endPoint.position;
-        }
-        else if (Vector3.Distance(cursor.position, endPoint.position) < 0.1f)
-        {
-            targetPosition = startPoint.position;
+            // Move the pointer towards the target position
+            cursor.position = Vector3.MoveTowards(cursor.position, targetPosition, diffParams.cursorMoveSpeed * Time.deltaTime);
         }
 
         // Check for input
-        if (interactAction.WasPressedThisFrame())
+        if (interactAction.WasReleasedThisFrame())
         {
             CheckSuccess();
         }

@@ -198,6 +198,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2015076250250040589}
+  - component: {fileID: 788642782171438487}
   - component: {fileID: 5902026304666920566}
   - component: {fileID: 5484655173454405345}
   - component: {fileID: 5843242822016016225}
@@ -228,6 +229,42 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &788642782171438487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2631724744197914178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bede7fad7d77fa045bf0744de74887b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChargeMinigame
+  safeZone: {fileID: 6582315355571879479}
+  perfectZone: {fileID: 3645700371574006299}
+  cursor: {fileID: 5567435837096687593}
+  startPoint: {fileID: 3141275532151675325}
+  endPoint: {fileID: 5372826745812971179}
+  interactAction:
+    m_Name: Interact
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: e9ced15b-6e25-4888-80c5-88eb6f5e1d7d
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  targetPosition: {x: 0, y: 0, z: 0}
+  currentDifficulty: 0
+  difficultyParams_:
+  - difficulty: 0
+    safeZoneWidth_min: 650
+    safeZoneWidth_max: 1300
+    perfectZoneWidth_min: 200
+    perfectZoneWidth_max: 600
+    perfectToMidRatio_max: 0.2
+    cursorMoveSpeed: 2000
 --- !u!223 &5902026304666920566
 Canvas:
   m_ObjectHideFlags: 0
@@ -379,7 +416,7 @@ GameObject:
   - component: {fileID: 6013861806677128583}
   - component: {fileID: 4081858312715431159}
   m_Layer: 5
-  m_Name: Bar Perfect Target Zone
+  m_Name: Bar Perfect Zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

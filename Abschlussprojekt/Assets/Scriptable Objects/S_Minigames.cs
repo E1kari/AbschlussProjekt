@@ -6,7 +6,9 @@ public class S_Minigames : ScriptableObject
 {
     public enum MinigameNames
     {
-        Bar,
+        Reaction,
+        Charge,
+        Hold,
 
     }
 
