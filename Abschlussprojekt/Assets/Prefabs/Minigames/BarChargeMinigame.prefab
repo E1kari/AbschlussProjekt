@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8804363860322760075}
   - component: {fileID: 2035149937140670435}
   m_Layer: 5
-  m_Name: Bar Mid Target Zone
+  m_Name: Bar Safe Zone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -198,12 +198,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2015076250250040589}
-  - component: {fileID: 6378312862150517016}
   - component: {fileID: 5902026304666920566}
   - component: {fileID: 5484655173454405345}
   - component: {fileID: 5843242822016016225}
   m_Layer: 5
-  m_Name: BarTimingMinigame
+  m_Name: BarChargeMinigame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -229,31 +228,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &6378312862150517016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2631724744197914178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8da33d4f11083b246b2ff1120cd8e308, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BarMinigame
-  safeZone: {fileID: 6582315355571879479}
-  perfectZone: {fileID: 3645700371574006299}
-  cursor: {fileID: 5567435837096687593}
-  startPoint: {fileID: 3141275532151675325}
-  endPoint: {fileID: 5372826745812971179}
-  difficultyParams_:
-  - difficulty: 0
-    safeZoneWidth_min: 650
-    safeZoneWidth_max: 1300
-    perfectZoneWidth_min: 200
-    perfectZoneWidth_max: 600
-    perfectToMidRatio_max: 0.6
-    cursorMoveSpeed: 2000
 --- !u!223 &5902026304666920566
 Canvas:
   m_ObjectHideFlags: 0

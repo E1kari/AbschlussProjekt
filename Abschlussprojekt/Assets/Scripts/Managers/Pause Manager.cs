@@ -12,7 +12,7 @@ public class PauseManager : MonoBehaviour
 
     private GameObject pauseMenu_;
     private bool isPaused = false;
-    Minigame[] pausedMinigames_;
+    BarMinigame[] pausedMinigames_;
 
     InputAction pauseAction;
 
@@ -53,8 +53,8 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 0f; // Freeze time
         isPaused = true;
 
-        pausedMinigames_ = FindObjectsByType<Minigame>();
-        foreach (Minigame minigame in pausedMinigames_)
+        pausedMinigames_ = FindObjectsByType<BarMinigame>();
+        foreach (BarMinigame minigame in pausedMinigames_)
         {
             Debug.LogWarning(minigame.name + " is paused");
             minigame.GameObject().SetActive(false);
@@ -75,7 +75,7 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 1f; // Resume time
         isPaused = false;
 
-        foreach (Minigame minigame in pausedMinigames_)
+        foreach (BarMinigame minigame in pausedMinigames_)
         {
             Debug.LogWarning(minigame.name + " is resumed");
             minigame.GameObject().SetActive(true);

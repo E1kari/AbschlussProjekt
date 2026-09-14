@@ -1,27 +1,16 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static Minigame;
+using static BarMinigame;
 using static S_AudioData;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
-public class BarMinigame : Minigame
+public class ReactionMinigame : BarMinigame
 {
-    public RectTransform safeZone;
-    public RectTransform perfectZone;
-
-    public RectTransform cursor;
-
-    public Transform startPoint;
-    public Transform endPoint;
-
-    InputAction interactAction;
-    Vector3 targetPosition;
-    DifficultyName currentDifficulty;
 
     [Serializable]
-    public struct BarDifficultyParams
+    public struct ReactionDifficultyParams
     {
         public DifficultyName difficulty;
 
@@ -35,18 +24,17 @@ public class BarMinigame : Minigame
         public float cursorMoveSpeed;
     }
 
-    public BarDifficultyParams[] difficultyParams_;
+    public ReactionDifficultyParams[] difficultyParams_;
 
 
-    public BarDifficultyParams GetDifficultyParams(DifficultyName difficultyName)
+    public ReactionDifficultyParams GetDifficultyParams(DifficultyName difficultyName)
     {
-        foreach (BarDifficultyParams param in difficultyParams_)
+        foreach (ReactionDifficultyParams param in difficultyParams_)
         {
             if (param.difficulty == difficultyName)
             {
                 return param;
             }
-
         }
 
         Debug.LogError("Difficulty " + difficultyName + " not found");
@@ -56,7 +44,7 @@ public class BarMinigame : Minigame
     public override void SetupGame(DifficultyName difficultyName)
     {
         currentDifficulty = difficultyName;
-        BarDifficultyParams diffParams = GetDifficultyParams(difficultyName);
+        ReactionDifficultyParams diffParams = GetDifficultyParams(difficultyName);
 
 
         //-----------------safe zone-----------------\\
@@ -79,41 +67,6 @@ public class BarMinigame : Minigame
         perfectZone.anchoredPosition = new Vector2(Random.Range(0, maxOffset_perfect), perfectZone.anchoredPosition.y);
     }
 
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        interactAction = InputSystem.actions.FindAction("Interact");
-
-
-        targetPosition = endPoint.position;
-        cursor.position = startPoint.position;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        BarDifficultyParams diffParams = GetDifficultyParams(currentDifficulty);
-        // Move the pointer towards the target position
-        cursor.position = Vector3.MoveTowards(cursor.position, targetPosition, diffParams.cursorMoveSpeed * Time.deltaTime);
-
-        // Change direction if the pointer reaches one of the points
-        if (Vector3.Distance(cursor.position, startPoint.position) < 0.1f)
-        {
-            targetPosition = endPoint.position;
-        }
-        else if (Vector3.Distance(cursor.position, endPoint.position) < 0.1f)
-        {
-            targetPosition = startPoint.position;
-        }
-
-        // Check for input
-        if (interactAction.WasPressedThisFrame())
-        {
-            CheckSuccess();
-        }
-    }
 
     void CheckSuccess()
     {
@@ -144,5 +97,28 @@ public class BarMinigame : Minigame
     {
         SetupGame(currentDifficulty);
         //Object.Destroy(this.gameObject);
+    }
+
+    public override void UpdateGame()
+    {
+        ReactionDifficultyParams diffParams = GetDifficultyParams(currentDifficulty);
+        // Move the pointer towards the target position
+        cursor.position = Vector3.MoveTowards(cursor.position, targetPosition, diffParams.cursorMoveSpeed * Time.deltaTime);
+
+        // Change direction if the pointer reaches one of the points
+        if (Vector3.Distance(cursor.position, startPoint.position) < 0.1f)
+        {
+            targetPosition = endPoint.position;
+        }
+        else if (Vector3.Distance(cursor.position, endPoint.position) < 0.1f)
+        {
+            targetPosition = startPoint.position;
+        }
+
+        // Check for input
+        if (interactAction.WasPressedThisFrame())
+        {
+            CheckSuccess();
+        }
     }
 }

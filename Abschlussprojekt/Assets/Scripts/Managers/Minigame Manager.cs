@@ -1,5 +1,5 @@
 using UnityEngine;
-using static Minigame;
+using static BarMinigame;
 using static S_Minigames;
 
 public class MinigameManager : MonoBehaviour
@@ -23,7 +23,7 @@ public class MinigameManager : MonoBehaviour
         MinigameStruct minigame = minigames.GetMinigame(minigameName);
         GameObject instance = Instantiate(minigame.minigamePrefab);
 
-        if (instance.TryGetComponent(out Minigame game))
+        if (instance.TryGetComponent(out BarMinigame game))
             game.SetupGame(difficultyName);
     }
 }
