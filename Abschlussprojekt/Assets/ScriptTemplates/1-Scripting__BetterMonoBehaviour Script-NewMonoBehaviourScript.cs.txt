@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,19 +6,19 @@ using UnityEngine.InputSystem;
 public class #SCRIPTNAME# : MonoBehaviour
 {
     //Awake is calles once after the MonoBehaviour is instanciated
-    void Awake()
+    protected void Awake()
     {  
         #NOTRIM#
     }
 
-    //Coroutine template. Can be called with StartCoroutine(Coroutine)
-    IEnumerator Coroutine()
+    //Coroutine template. Can be called with StartCoroutine(ExampleCoroutine)
+    private IEnumerator ExampleCoroutine()
     {
          yield return null;
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
         #NOTRIM#
     }
