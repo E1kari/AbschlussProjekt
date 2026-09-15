@@ -246,18 +246,19 @@ MonoBehaviour:
   cursor: {fileID: 5567435837096687593}
   startPoint: {fileID: 3141275532151675325}
   endPoint: {fileID: 5372826745812971179}
-  targetPosition: {x: 0, y: 0, z: 0}
   difficultyParams_:
   - difficulty: 0
     safeZoneWidth_min: 650
     safeZoneWidth_max: 1300
     safeZone_percentagePerSec: 10
+    zoneMovementSpeed_min: 100
+    zoneMovementSpeed_max: 500
     perfectZoneWidth_min: 200
     perfectZoneWidth_max: 600
     perfectZone_percentagePerSec: 25
     perfectToMidRatio_max: 0.6
     baseZone_falloffPercentagePerSec: 5
-    cursorMoveSpeed: 1000
+    cursorMoveSpeed: 1300
     cursorFalloffSpeed: 1500
 --- !u!223 &5902026304666920566
 Canvas:

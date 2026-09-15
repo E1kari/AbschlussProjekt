@@ -17,6 +17,10 @@ public class HoldMinigame : BarMinigame
         [Range(0f, 100f)] public float safeZone_percentagePerSec;
 
         [Space(10)]
+        public float zoneMovementSpeed_min;
+        public float zoneMovementSpeed_max;
+
+        [Space(10)]
         public float perfectZoneWidth_min;
         public float perfectZoneWidth_max;
         [Range(0f, 100f)] public float perfectZone_percentagePerSec;
@@ -28,8 +32,10 @@ public class HoldMinigame : BarMinigame
         [Space(10)]
         public float cursorMoveSpeed;
         public float cursorFalloffSpeed;
+
     }
     protected float holdPercentage;
+    protected float currentZoneSpeed = 500f;
 
     public HoldDifficultyParams[] difficultyParams_;
 
@@ -76,6 +82,8 @@ public class HoldMinigame : BarMinigame
 
         //-----------------cursor-----------------\\
         cursor.position = startPoint.position;
+
+        GenerateTarget();
     }
 
 
@@ -95,7 +103,10 @@ public class HoldMinigame : BarMinigame
         }
         else
         {
-            holdPercentage -= Time.deltaTime * diffParams.baseZone_falloffPercentagePerSec;
+            if (holdPercentage > 0f)
+            {
+                holdPercentage -= Time.deltaTime * diffParams.baseZone_falloffPercentagePerSec;
+            }
         }
 
         if (holdPercentage >= 100f)
@@ -125,7 +136,25 @@ public class HoldMinigame : BarMinigame
             cursor.position = Vector3.MoveTowards(cursor.position, startPoint.position, diffParams.cursorFalloffSpeed * Time.deltaTime);
         }
 
+        safeZone.anchoredPosition = Vector3.MoveTowards(safeZone.anchoredPosition, targetPosition, currentZoneSpeed * Time.deltaTime);
+
+        if (Vector3.Distance(safeZone.anchoredPosition, targetPosition) < 0.1f)
+        {
+            GenerateTarget();
+        }
 
         CheckSuccess();
     }
+
+    public void GenerateTarget()
+    {
+        HoldDifficultyParams diffParams = GetDifficultyParams(currentDifficulty);
+
+        float barWidth_base = ((RectTransform)safeZone.parent).rect.width;
+        float maxOffset_safe = barWidth_base - safeZone.rect.width;
+        targetPosition = new Vector2(Random.Range(0, maxOffset_safe), 0);
+
+        currentZoneSpeed = Random.Range(diffParams.zoneMovementSpeed_min, diffParams.zoneMovementSpeed_max);
+    }
+
 }

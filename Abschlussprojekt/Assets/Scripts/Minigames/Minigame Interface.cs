@@ -13,7 +13,7 @@ public abstract class Minigame : MonoBehaviour
     protected InputAction interactAction;
     protected DifficultyName currentDifficulty;
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         interactAction = InputSystem.actions.FindAction("Interact");
     }

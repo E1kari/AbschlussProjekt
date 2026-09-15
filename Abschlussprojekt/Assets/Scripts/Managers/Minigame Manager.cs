@@ -7,39 +7,31 @@ public class MinigameManager : MonoBehaviour
 {
     [SerializeField] S_Minigames minigames;
 
-    public InputAction startReactionGame;
-    public InputAction startChargeGame;
-    public InputAction startHoldGame;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
-        startReactionGame = InputSystem.actions.FindAction("DEBUG_StartReactionGame");
-        startChargeGame = InputSystem.actions.FindAction("DEBUG_StartChargeGame");
-        startHoldGame = InputSystem.actions.FindAction("DEBUG_StartHoldGame");
     }
 
-    // Update is called once per frame
-    void Update()
+    protected void OnDEBUG_StartReactionGame()
     {
-        if (startReactionGame.WasPressedThisFrame())
-        {
-            Debug.Log("Starting reaction minigame");
-            startMinigame(MinigameNames.Reaction, DifficultyName.Easy);
-        }
-        if (startChargeGame.WasPressedThisFrame())
-        {
-            Debug.Log("Starting charge minigame");
-            startMinigame(MinigameNames.Charge, DifficultyName.Easy);
-        }
-        if (startHoldGame.WasPressedThisFrame())
-        {
-            Debug.Log("Starting hold minigame");
-            startMinigame(MinigameNames.Hold, DifficultyName.Easy);
-        }
+        Debug.Log("Starting reaction minigame");
+        StartMinigame(MinigameNames.Reaction, DifficultyName.Easy);
     }
 
-    public void startMinigame(MinigameNames minigameName, DifficultyName difficultyName)
+    protected void OnDEBUG_StartChargeGame()
+    {
+        Debug.Log("Starting charge minigame");
+        StartMinigame(MinigameNames.Charge, DifficultyName.Easy);
+    }
+
+    protected void OnDEBUG_StartHoldGame()
+    {
+        Debug.Log("Starting hold minigame");
+        StartMinigame(MinigameNames.Hold, DifficultyName.Easy);
+    }
+
+
+    public void StartMinigame(MinigameNames minigameName, DifficultyName difficultyName)
     {
         MinigameStruct minigame = minigames.GetMinigame(minigameName);
         GameObject instance = Instantiate(minigame.minigamePrefab);

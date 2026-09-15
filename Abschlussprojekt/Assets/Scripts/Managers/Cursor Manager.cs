@@ -6,30 +6,20 @@ public class CursorManager : MonoBehaviour
 {
     [SerializeField] S_Cursors cursors;
 
-    InputAction interactAction;
     CursorType currentCursor = CursorType.Default;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        setCursor(CursorType.Default);
-        interactAction = InputSystem.actions.FindAction("Interact");
+        SetCursor(CursorType.Default);
     }
 
-    void Update()
+    protected void OnInteract(InputValue value)
     {
-        if (interactAction.WasPressedThisFrame())
-        {
-            setCursor(currentCursor, true);
-        }
-        else if (interactAction.WasReleasedThisFrame())
-        {
-            setCursor(currentCursor, false);
-        }
+        SetCursor(currentCursor, value.isPressed);
     }
 
-    // Update is called once per frame
-    void setCursor(CursorType type, bool clicked = false)
+    public void SetCursor(CursorType type, bool clicked = false)
     {
         CursorStruct cursor = cursors.GetCursor(type);
         if (clicked)
