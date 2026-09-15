@@ -3,19 +3,19 @@ using UnityEngine;
 public abstract class BarMinigame : Minigame
 {
 
-    public RectTransform safeZone;
-    public RectTransform perfectZone;
+    [SerializeField] protected RectTransform safeZone;
+    [SerializeField] protected RectTransform perfectZone;
 
-    public RectTransform cursor;
+    [SerializeField] protected RectTransform cursor;
 
-    public Transform startPoint;
-    public Transform endPoint;
+    [SerializeField] protected Transform startPoint;
+    [SerializeField] protected Transform endPoint;
 
-    public Vector3 targetPosition;
+    protected Vector3 targetPosition;
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
 
         targetPosition = endPoint.position;
         cursor.position = startPoint.position;

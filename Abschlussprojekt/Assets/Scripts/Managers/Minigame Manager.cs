@@ -12,7 +12,7 @@ public class MinigameManager : MonoBehaviour
     public InputAction startHoldGame;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         startReactionGame = InputSystem.actions.FindAction("DEBUG_StartReactionGame");
         startChargeGame = InputSystem.actions.FindAction("DEBUG_StartChargeGame");

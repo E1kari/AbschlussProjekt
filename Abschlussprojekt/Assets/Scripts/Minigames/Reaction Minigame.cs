@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using static BarMinigame;
 using static S_AudioData;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
@@ -12,16 +14,13 @@ public class ReactionMinigame : BarMinigame
     {
         public DifficultyName difficulty;
 
-        [Space(10)]
         public float safeZoneWidth_min;
         public float safeZoneWidth_max;
 
-        [Space(10)]
         public float perfectZoneWidth_min;
         public float perfectZoneWidth_max;
         [Range(0f, 1f)] public float perfectToMidRatio_max;
 
-        [Space(10)]
         public float cursorMoveSpeed;
     }
 
@@ -66,9 +65,6 @@ public class ReactionMinigame : BarMinigame
         float barWidth_safe = ((RectTransform)perfectZone.parent).rect.width;
         float maxOffset_perfect = barWidth_safe - perfectZone_Width;
         perfectZone.anchoredPosition = new Vector2(Random.Range(0, maxOffset_perfect), perfectZone.anchoredPosition.y);
-
-        //-----------------cursor-----------------\\
-        cursor.position = startPoint.position;
     }
 
 
@@ -99,8 +95,8 @@ public class ReactionMinigame : BarMinigame
 
     public override void endGame()
     {
-        //SetupGame(currentDifficulty);
-        Object.Destroy(this.gameObject);
+        SetupGame(currentDifficulty);
+        //Object.Destroy(this.gameObject);
     }
 
     public override void UpdateGame()
@@ -112,12 +108,9 @@ public class ReactionMinigame : BarMinigame
         // Change direction if the pointer reaches one of the points
         if (Vector3.Distance(cursor.position, startPoint.position) < 0.1f)
         {
-            targetPosition = endPoint.position;
+
         }
-        else if (Vector3.Distance(cursor.position, endPoint.position) < 0.1f)
-        {
-            targetPosition = startPoint.position;
-        }
+
 
         // Check for input
         if (interactAction.WasPressedThisFrame())
