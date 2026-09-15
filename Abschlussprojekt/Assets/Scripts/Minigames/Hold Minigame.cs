@@ -37,8 +37,6 @@ public class HoldMinigame : BarMinigame
     protected float holdPercentage;
     protected float currentZoneSpeed = 500f;
 
-    public RectTransform DEBUG_target;
-
     public HoldDifficultyParams[] difficultyParams_;
 
 

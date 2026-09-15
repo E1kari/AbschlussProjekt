@@ -95,8 +95,8 @@ public class ReactionMinigame : BarMinigame
 
     public override void endGame()
     {
-        SetupGame(currentDifficulty);
-        //Object.Destroy(this.gameObject);
+        //SetupGame(currentDifficulty);
+        Object.Destroy(this.gameObject);
     }
 
     public override void UpdateGame()
@@ -108,7 +108,11 @@ public class ReactionMinigame : BarMinigame
         // Change direction if the pointer reaches one of the points
         if (Vector3.Distance(cursor.position, startPoint.position) < 0.1f)
         {
-
+            targetPosition = endPoint.position;
+        }
+        else if (Vector3.Distance(cursor.position, endPoint.position) < 0.1f)
+        {
+            targetPosition = startPoint.position;
         }
 
 
