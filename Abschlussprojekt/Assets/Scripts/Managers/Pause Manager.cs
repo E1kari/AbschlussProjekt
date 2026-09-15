@@ -12,28 +12,18 @@ public class PauseManager : MonoBehaviour
 
     private GameObject pauseMenu_;
     private bool isPaused = false;
-    BarMinigame[] pausedMinigames_;
+    Minigame[] pausedMinigames_;
 
     InputAction pauseAction;
 
-    public void Start()
+    public void Awake()
     {
         pauseAction = InputSystem.actions.FindAction("Pause");
-        StartCoroutine(OnSceneLoaded());
     }
 
-    private IEnumerator OnSceneLoaded()
+    protected void OnPause()
     {
-        yield return null;
-        //sceneManager_ = Resources.Load<S_SceneManager>("Scriptable Objects/S_SceneSaver");
-    }
-
-    public void Update()
-    {
-        if (pauseAction.WasPressedThisFrame())
-        {
-            TogglePause(true);
-        }
+        TogglePause(true);
     }
 
     public void TogglePause(bool loadPauseMenu = false)
@@ -48,13 +38,13 @@ public class PauseManager : MonoBehaviour
         }
     }
 
-    private void PauseGame(bool loadPauseMenu = true)
+    protected void PauseGame(bool loadPauseMenu = true)
     {
         Time.timeScale = 0f; // Freeze time
         isPaused = true;
 
-        pausedMinigames_ = FindObjectsByType<BarMinigame>();
-        foreach (BarMinigame minigame in pausedMinigames_)
+        pausedMinigames_ = FindObjectsByType<Minigame>();
+        foreach (Minigame minigame in pausedMinigames_)
         {
             Debug.LogWarning(minigame.name + " is paused");
             minigame.GameObject().SetActive(false);
@@ -69,7 +59,7 @@ public class PauseManager : MonoBehaviour
         }
     }
 
-    private void ResumeGame()
+    protected void ResumeGame()
     {
         Debug.Log("Resuming game");
         Time.timeScale = 1f; // Resume time

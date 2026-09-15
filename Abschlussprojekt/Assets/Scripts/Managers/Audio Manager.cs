@@ -11,7 +11,7 @@ public class AudioManager : MonoBehaviour
     private AudioSource effectSource;
 
 
-    void Start()
+    void Awake()
     {
         if (FindObjectsByType<AudioManager>().Length > 1)
         {
@@ -20,7 +20,6 @@ public class AudioManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
-        //audioData = Resources.Load<S_AudioData>("Scriptable Objects/AudioData");
 
         musicSource = gameObject.AddComponent<AudioSource>();
         musicSource.loop = true;
